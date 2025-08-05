@@ -1,1 +1,1 @@
-This is a simple script that converts BC Transit Victoria GTFS text files into a pre-populated SQLite database file. This is a compagain project to my Transit Tracks project which can be found at: https://github.com/CordCorcese/TransitTracks 
+This is a simple script that converts BC Transit Victoria GTFS text files into a pre-populated SQLite database file. This is a companion project to my Transit Tracks project which can be found at: https://github.com/CordCorcese/TransitTracks 
