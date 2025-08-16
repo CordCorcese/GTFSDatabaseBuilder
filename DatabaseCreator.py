@@ -2,12 +2,12 @@ import sqlite3
 
 database = sqlite3.connect("TransitTracks.db")
 cursor = database.cursor()
-cursor.execute("CREATE TABLE IF NOT EXISTS Stop (stopId Int PRIMARY KEY,stopName String,stopLat Double,stopLon Double,wheelchair Int,stopCode Int)") 
-cursor.execute("CREATE TABLE IF NOT EXISTS Route (routeID String PRIMARY KEY,routeShortName String,routeLongName String,routeType Int,routeColour String,routeTextColour String)") 
-cursor.execute("CREATE TABLE IF NOT EXISTS Trip (routeID String,serviceID Int,tripID String PRIMARY KEY,tripHeadSign String,shapeID Int,blockID Int,directionID Int)") 
-cursor.execute("CREATE TABLE IF NOT EXISTS StopTime (tripID String,arrivalTime String,departureTime String,stopID Int,stopSequence Int,shapeDistTravelled Int,stopHeadSign Int,pickupType Int,dropOffType Int,timePoint INT, PRIMARY KEY (tripID, stopSequence))") 
-cursor.execute("CREATE TABLE IF NOT EXISTS CalendarDate (serviceID Int,date String,exceptionType Int, PRIMARY KEY(serviceID, date))") 
-cursor.execute("CREATE TABLE IF NOT EXISTS Shape (shapeID Int,shapePtLat Double,shapePtLon Double,shapePtSequence Int,shapeDistTravelled Int,PRIMARY KEY (shapeID, shapePtSequence))") 
+cursor.execute("CREATE TABLE IF NOT EXISTS Stop (stopId INTEGER PRIMARY KEY NOT NULL,stopName TEXT,stopLat REAL NOT NULL,stopLon REAL NOT NULL,wheelchair INTEGER NOT NULL,stopCode INTEGER NOT NULL)") 
+cursor.execute("CREATE TABLE IF NOT EXISTS Route (routeID TEXT PRIMARY KEY NOT NULL,routeShortName TEXT NOT NULL,routeLongName TEXT NOT NULL,routeType INTEGER NOT NULL,routeColour TEXT NOT NULL,routeTextColour TEXT NOT NULL)") 
+cursor.execute("CREATE TABLE IF NOT EXISTS Trip (routeID TEXT NOT NULL,serviceID INTEGER NOT NULL,tripID TEXT PRIMARY KEY NOT NULL,tripHeadSign TEXT NOT NULL,shapeID INTEGER NOT NULL,blockID INTEGER NOT NULL,directionID INTEGER NOT NULL)") 
+cursor.execute("CREATE TABLE IF NOT EXISTS StopTime (tripID TEXT NOT NULL,arrivalTime TEXT NOT NULL,departureTime TEXT NOT NULL,stopID INTEGER NOT NULL,stopSequence INTEGER NOT NULL,shapeDistTravelled INTEGER NOT NULL,stopHeadSign TEXT,pickupType INTEGER NOT NULL,dropOffType INTEGER NOT NULL,timePoint INTEGER NOT NULL, PRIMARY KEY (tripID, stopSequence))") 
+cursor.execute("CREATE TABLE IF NOT EXISTS CalendarDate (serviceID INTEGER NOT NULL,date TEXT NOT NULL PRIMARY KEY,exceptionType INTEGER NOT NULL)") 
+cursor.execute("CREATE TABLE IF NOT EXISTS Shape (shapeID INTEGER NOT NULL,shapePtLat REAL NOT NULL,shapePtLon REAL NOT NULL,shapePtSequence INTEGER NOT NULL,shapeDistTravelled INTEGER NOT NULL,PRIMARY KEY (shapeID, shapePtSequence))") 
 
 stopTimeInsertSQL = '''INSERT INTO StopTime (tripID, arrivalTime, departureTime, stopID, stopSequence, shapeDistTravelled, stopHeadSign, pickupType, dropOffType, timepoint) VALUES (?,?,?,?,?,?,?,?,?,?)'''
 stoptimes = open("stop_times.txt") 
